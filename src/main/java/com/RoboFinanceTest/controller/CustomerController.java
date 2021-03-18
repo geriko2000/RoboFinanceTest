@@ -1,5 +1,6 @@
 package com.RoboFinanceTest.controller;
 
+import com.RoboFinanceTest.models.Address;
 import com.RoboFinanceTest.models.Customer;
 import com.RoboFinanceTest.repos.AddressRepo;
 import com.RoboFinanceTest.repos.CustomerRepo;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
@@ -23,7 +25,7 @@ public class CustomerController {
     private AddressRepo addressRepo;
 
     @GetMapping("/search")
-    public String search(
+    public String searchMapping(
             @RequestParam(required = false, defaultValue = "") String customer,
             Model model) {
         if (!customer.isEmpty()) {
@@ -44,7 +46,7 @@ public class CustomerController {
     }
 
     @GetMapping("/addcustomer")
-    public String addCustomer() {
+    public String addCustomerMapping() {
         return "addcustomer";
     }
 
@@ -62,8 +64,28 @@ public class CustomerController {
             @RequestParam(required = false) String flat,
             Model model
     ) {
-        
+
+
+        Customer customer = addCustomer(first_name, last_name, middle_name, sex,
+                addAddress(country, region, city, street, house, flat));
+        model.addAttribute("message", "Пользователь " + customer.getFirst_name() + " " + customer.getLast_name() +
+                "Добавлен!");
         return "addcustomer";
+    }
+
+    private Address addAddress(String country, String region, String city, String street, String house, String flat) {
+        Timestamp created = new Timestamp(System.currentTimeMillis());
+        Address address = new Address(country, region, city, street, house, flat, created);
+        addressRepo.save(address);
+        System.out.println(address.getId());
+        return address;
+    }
+
+    private Customer addCustomer(String first_name, String last_name, String middle_name, String sex, Address address) {
+        Customer customer = new Customer(address, address, first_name, last_name, middle_name, sex);
+        customerRepo.save(customer);
+        return customer;
+
     }
 
     private void findAllCustomers(Model model) {
@@ -71,3 +93,4 @@ public class CustomerController {
         model.addAttribute("customers", customers);
     }
 }
+

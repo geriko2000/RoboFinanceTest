@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Table(name = "address")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String country;
@@ -18,6 +18,19 @@ public class Address {
     private String flat;
     private Timestamp created;
     private Timestamp modified;
+
+    public Address() {
+    }
+
+    public Address(String country, String region, String city, String street, String house, String flat, Timestamp created) {
+        this.country = country;
+        this.region = region;
+        this.city = city;
+        this.street = street;
+        this.house = house;
+        this.flat = flat;
+        this.created = created;
+    }
 
     public long getId() {
         return id;

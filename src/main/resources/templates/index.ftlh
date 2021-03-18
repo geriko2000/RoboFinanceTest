@@ -22,7 +22,7 @@
     <#list customers as customer>
         <tr>
             <td>${customer.id}</td>
-            <td>${customer.first_name}</td>
+            <td>${customer.first_name!}</td>
         </tr>
     </#list>
     </body>

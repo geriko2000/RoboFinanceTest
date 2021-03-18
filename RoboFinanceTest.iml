@@ -19,7 +19,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="RoboFinanceTest" value="2432cbb6-e1ee-4ed6-b95c-03a9e8677814" />
-          <factory-entry name="entityManagerFactory" />
+          <factory-entry name="entityManagerFactory" value="2432cbb6-e1ee-4ed6-b95c-03a9e8677814" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

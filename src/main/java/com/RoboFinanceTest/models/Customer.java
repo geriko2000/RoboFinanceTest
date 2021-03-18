@@ -7,16 +7,28 @@ import javax.persistence.*;
 @Table(name = "customer")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "registred_address_id", referencedColumnName = "id")
     private Address registred_address_id;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "actual_address_id", referencedColumnName = "id")
     private Address actual_address_id;
+
+    public Customer() {
+    }
+
+    public Customer(Address registred_address_id, Address actual_address_id, String first_name, String last_name, String middle_name, String sex) {
+        this.registred_address_id = registred_address_id;
+        this.actual_address_id = actual_address_id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.middle_name = middle_name;
+        this.sex = sex;
+    }
 
     private String first_name;
     private String last_name;
