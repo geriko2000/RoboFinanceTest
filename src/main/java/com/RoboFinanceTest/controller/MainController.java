@@ -16,6 +16,7 @@ public class MainController {
     @Autowired
     private CustomerRepo customerRepo;
 
+    // Гет маппинг главной страницы
     @GetMapping("/")
     public String index(Model model) {
         List<Customer> customers = customerRepo.findAll();
