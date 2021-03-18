@@ -39,20 +39,20 @@
             <td>${customer.last_name!}</td>
             <td>${customer.middle_name!}</td>
             <td>${customer.sex}</td>
-            <td>${customer.actual_address_id.country!}</td>
-            <td>${customer.actual_address_id.region!}</td>
-            <td>${customer.actual_address_id.city!}</td>
-            <td>${customer.actual_address_id.street!}</td>
-            <td>${customer.actual_address_id.house!}</td>
-            <td>${customer.actual_address_id.flat!}</td>
-            <td>${customer.actual_address_id.created!}</td>
-            <td>${customer.actual_address_id.modified!}</td>
+            <td>${customer.actualAddressId.country!}</td>
+            <td>${customer.actualAddressId.region!}</td>
+            <td>${customer.actualAddressId.city!}</td>
+            <td>${customer.actualAddressId.street!}</td>
+            <td>${customer.actualAddressId.house!}</td>
+            <td>${customer.actualAddressId.flat!}</td>
+            <td>${customer.actualAddressId.created!}</td>
+            <td>${customer.actualAddressId.modified!}</td>
         </tr>
         <#else>
         </br>Пользователи отсутствуют
     </#list>
     </body>
 </table>
-
+<a href="/">Главная страница</a><br/>
 </body>
 </html>

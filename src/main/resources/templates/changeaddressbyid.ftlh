@@ -6,19 +6,9 @@
 </head>
 <body>
 <div>RoboFinance Тестовое задание</div>
-<div>Добавить нового пользователя</div>
+<div>Изменить адрес пользователя ${customerFirstName!} ${customerMiddleName!} ${customerLastName!}</div>
 <form method="post">
-    <label for="firstname">Имя</label><br/>
-    <input type="text" name="first_name" placeholder="Имя" id="firstname"/><br/>
-    <label for="lastname">Фамииля</label><br/>
-    <input type="text" name="last_name" placeholder="Фамилия" id="lastname"/><br/>
-    <label for="middlename">Отчество</label><br/>
-    <input type="text" name="middle_name" placeholder="Отчество" id="middlename"/><br/>
-    <label for="sex">Пол</label><br/>
-    <select name="sex" id="sex">
-        <option value="male">Мужской</option>
-        <option value="female">Женский</option>
-    </select><br/>
+    <input type="hidden" name="_method" value="put" />
     <label for="country">Страна</label><br/>
     <input type="text" name="country" placeholder="Страна" id="country"/><br/><br/>
     <label for="region">Регион</label><br/>
@@ -33,7 +23,7 @@
     <input type="text" name="flat" placeholder="Квартира" id="flat"/><br/><br/>
     <button type="submit">Добавить</button>
 </form>
-<a href="/">Главная страница</a><br/>
 <b>${message!}</b><br/>
+<a href="/">Главная страница</a><br/>
 </body>
 </html>

@@ -12,18 +12,18 @@ public class Customer {
 
     @OneToOne
     @JoinColumn(name = "registred_address_id", referencedColumnName = "id")
-    private Address registred_address_id;
+    private Address registredAddressId;
 
     @OneToOne
     @JoinColumn(name = "actual_address_id", referencedColumnName = "id")
-    private Address actual_address_id;
+    private Address actualAddressId;
 
     public Customer() {
     }
 
     public Customer(Address registred_address_id, Address actual_address_id, String first_name, String last_name, String middle_name, String sex) {
-        this.registred_address_id = registred_address_id;
-        this.actual_address_id = actual_address_id;
+        this.registredAddressId = registred_address_id;
+        this.actualAddressId = actual_address_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.middle_name = middle_name;
@@ -44,19 +44,19 @@ public class Customer {
     }
 
     public Address getRegistered_address_id() {
-        return registred_address_id;
+        return registredAddressId;
     }
 
     public void setRegistered_address_id(Address registered_address_id) {
-        this.registred_address_id = registered_address_id;
+        this.registredAddressId = registered_address_id;
     }
 
-    public Address getActual_address_id() {
-        return actual_address_id;
+    public Address getActualAddressId() {
+        return actualAddressId;
     }
 
-    public void setActual_address_id(Address actual_address_id) {
-        this.actual_address_id = actual_address_id;
+    public void setActualAddressId(Address actual_address_id) {
+        this.actualAddressId = actual_address_id;
     }
 
     public String getFirst_name() {

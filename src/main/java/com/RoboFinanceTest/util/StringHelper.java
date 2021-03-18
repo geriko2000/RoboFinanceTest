@@ -14,14 +14,14 @@ public class StringHelper {
 
     // Является ли строка цифрами, буквами и дефисом
     public static boolean isLettersNumbersAndHyphen(String string) {
-        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я\\-]");
+        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9\\-]");
         Matcher matcher = pattern.matcher(string);
         return matcher.find();
     }
 
     // Является ли строка цифраи, буквами и слэшем
     public static boolean isLettersNumbersAndSlash(String string) {
-        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я/]");
+        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9/]");
         Matcher matcher = pattern.matcher(string);
         return matcher.find();
     }
