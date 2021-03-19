@@ -9,6 +9,7 @@ public class StringHelper {
     public static boolean isLetters(String string) {
         Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я]");
         Matcher matcher = pattern.matcher(string);
+        System.out.println("leters ");
         return matcher.find();
     }
 
@@ -16,6 +17,7 @@ public class StringHelper {
     public static boolean isLettersNumbersAndHyphen(String string) {
         Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9\\-]");
         Matcher matcher = pattern.matcher(string);
+        System.out.println("kek1 ");
         return matcher.find();
     }
 
@@ -23,6 +25,7 @@ public class StringHelper {
     public static boolean isLettersNumbersAndSlash(String string) {
         Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9/]");
         Matcher matcher = pattern.matcher(string);
+        System.out.println("kek1 ");
         return matcher.find();
     }
 
@@ -30,6 +33,7 @@ public class StringHelper {
     public static boolean isNumbers(String string) {
         Pattern pattern = Pattern.compile("[0-9]");
         Matcher matcher = pattern.matcher(string);
+        System.out.println("kek1 ");
         return matcher.find();
     }
 }

@@ -22,7 +22,7 @@
         <th>Квартира</th>
         <th>Создан</th>
         <th>Модифицирован</th>
-        <th>Редактировать адрес</th>
+        <th>Редактировать фактический адрес</th>
     </tr>
     </thead>
     <body>
@@ -38,7 +38,7 @@
             <td>${customer.actualAddressId.street!}</td>
             <td>${customer.actualAddressId.house!}</td>
             <td>${customer.actualAddressId.flat!}</td>
-            <td>${customer.actualAddressId.created!}</td>
+            <td>${customer.registeredAddressId.created!}</td>
             <td>${customer.actualAddressId.modified!}</td>
             <td><a href="/changeaddress/${customer.id}">✎</a></td>
         </tr>
@@ -47,6 +47,7 @@
     </#list>
     </body>
 </table>
+<b>${message!}</b><br/>
 <a href="/">Главная страница</a><br/>
 </body>
 </html>

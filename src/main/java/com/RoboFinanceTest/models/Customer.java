@@ -43,11 +43,11 @@ public class Customer {
         this.id = id;
     }
 
-    public Address getRegistered_address_id() {
+    public Address getRegisteredAddressId() {
         return registredAddressId;
     }
 
-    public void setRegistered_address_id(Address registered_address_id) {
+    public void setRegisteredAddressId(Address registered_address_id) {
         this.registredAddressId = registered_address_id;
     }
 
