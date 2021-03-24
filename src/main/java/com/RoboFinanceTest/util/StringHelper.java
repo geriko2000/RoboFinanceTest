@@ -7,33 +7,29 @@ public class StringHelper {
 
     // Является ли строка буквами
     public static boolean isLetters(String string) {
-        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я]");
+        Pattern pattern = Pattern.compile("^[a-zA-Zа-яА-Я]*$");
         Matcher matcher = pattern.matcher(string);
-        System.out.println("leters ");
-        return matcher.find();
+        return matcher.matches();
     }
 
     // Является ли строка цифрами, буквами и дефисом
     public static boolean isLettersNumbersAndHyphen(String string) {
-        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9\\-]");
+        Pattern pattern = Pattern.compile("^[a-zA-Zа-яА-Я0-9\\-]*$");
         Matcher matcher = pattern.matcher(string);
-        System.out.println("kek1 ");
-        return matcher.find();
+        return matcher.matches();
     }
 
     // Является ли строка цифраи, буквами и слэшем
     public static boolean isLettersNumbersAndSlash(String string) {
-        Pattern pattern = Pattern.compile("[a-zA-Zа-яА-Я0-9/]");
+        Pattern pattern = Pattern.compile("^[a-zA-Zа-яА-Я0-9/]*$");
         Matcher matcher = pattern.matcher(string);
-        System.out.println("kek1 ");
-        return matcher.find();
+        return matcher.matches();
     }
 
     // Является ли строка цифрами
     public static boolean isNumbers(String string) {
-        Pattern pattern = Pattern.compile("[0-9]");
+        Pattern pattern = Pattern.compile("^[0-9]*$");
         Matcher matcher = pattern.matcher(string);
-        System.out.println("kek1 ");
-        return matcher.find();
+        return matcher.matches();
     }
 }

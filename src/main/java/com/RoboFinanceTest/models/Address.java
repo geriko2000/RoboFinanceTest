@@ -1,5 +1,7 @@
 package com.RoboFinanceTest.models;
 
+import org.hibernate.annotations.SortNatural;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
