@@ -1,7 +1,6 @@
 package com.RoboFinanceTest.controller;
 
 import com.RoboFinanceTest.models.Customer;
-import com.RoboFinanceTest.repos.AddressRepo;
 import com.RoboFinanceTest.repos.CustomerRepo;
 import com.RoboFinanceTest.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ public class CustomerController {
 
     @Autowired
     private CustomerRepo customerRepo;
-
-    @Autowired
-    private AddressRepo addressRepo;
 
     @Autowired
     private CustomerService customerService;
@@ -67,16 +63,14 @@ public class CustomerController {
             @RequestParam(required = false) String flat,
             Model model) {
 
-        if (customerService.checkCustomerPersonalData(first_name, last_name, middle_name, sex, model) &&
-                customerService.checkCustomerAddressData(country, region, city, street, house, flat, model)) {
-            System.out.println("NO!");
-            return "addcustomer";
+        if (customerService.checkCustomerPersonalData(first_name, last_name, middle_name, sex) ||
+                customerService.checkCustomerAddressData(country, region, city, street, house, flat)) {
+            Customer customer = customerService.addCustomer(first_name, last_name, middle_name, sex,
+                    customerService.addAddress(country, region, city, street, house, flat));
+            model.addAttribute("message", "Пользователь " + customer.getFirst_name() + " " + customer.getLast_name() +
+                    "Добавлен!");
         }
 
-        Customer customer = customerService.addCustomer(first_name, last_name, middle_name, sex,
-                customerService.addAddress(country, region, city, street, house, flat));
-        model.addAttribute("message", "Пользователь " + customer.getFirst_name() + " " + customer.getLast_name() +
-                "Добавлен!");
         return "addcustomer";
     }
 
@@ -93,6 +87,9 @@ public class CustomerController {
     public String changeAddressById(Model model, @PathVariable String id) {
         try {
             long customerId = Long.parseLong(id);
+            if (customerRepo.findById(customerId) == null) {
+                return "redirect:/changeaddress";
+            }
             String first_name = customerRepo.findById(customerId).getFirst_name();
             String last_name = customerRepo.findById(customerId).getLast_name();
             String middle_name = customerRepo.findById(customerId).getMiddle_name();
@@ -106,8 +103,8 @@ public class CustomerController {
     }
 
     // Пут маппинг для смены адреса нужного пользователя
-    @RequestMapping(value={"/changeaddress/{id}"},
-            method={RequestMethod.POST,RequestMethod.PUT})
+    @RequestMapping(value = {"/changeaddress/{id}"},
+            method = {RequestMethod.POST, RequestMethod.PUT})
     public String changeAddressMapping(@PathVariable String id,
                                        @RequestParam(required = false) String country,
                                        @RequestParam(required = false) String region,
@@ -116,18 +113,20 @@ public class CustomerController {
                                        @RequestParam(required = false) String house,
                                        @RequestParam(required = false) String flat,
                                        Model model) {
-        if (customerService.checkCustomerAddressData(country, region, city, street, house, flat, model)) {
-            return "redirect:/changeaddress";
-        }
-        try {
-            long customerId = Long.parseLong(id);
-            customerService.changeActualAddress(country, region, city, street, house, flat, customerId);
 
-            return "redirect:/changeaddress";
-        } catch (NumberFormatException e) {
-            return "redirect:/changeaddress";
+        if (customerService.checkCustomerAddressData(country, region, city, street, house, flat)) {
+            try {
+                long customerId = Long.parseLong(id);
+                if (customerRepo.findById(customerId) == null) {
+                    return "redirect:/changeaddress";
+                }
+                customerService.changeActualAddress(country, region, city, street, house, flat, customerId);
+            } catch (NumberFormatException e) {
+
+            }
         }
 
+        return "redirect:/changeaddress";
     }
 
 }

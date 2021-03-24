@@ -64,17 +64,17 @@ public class CustomerService {
             addressRepo.save(address);
             customer.setActualAddressId(address);
             customerRepo.save(customer);
-            return;
+        } else {
+            Address address = customer.getActualAddressId();
+            if (country != null) address.setCountry(country);
+            if (region != null) address.setRegion(region);
+            if (city != null) address.setCity(city);
+            if (street != null) address.setStreet(street);
+            if (house != null) address.setHouse(house);
+            if (flat != null) address.setFlat(flat);
+            address.setModified(new Timestamp(System.currentTimeMillis()));
+            addressRepo.save(address);
         }
-        Address address = customer.getActualAddressId();
-        if (country != null) address.setCountry(country);
-        if (region != null) address.setRegion(region);
-        if (city != null) address.setCity(city);
-        if (street != null) address.setStreet(street);
-        if (house != null) address.setHouse(house);
-        if (flat != null) address.setFlat(flat);
-        address.setModified(new Timestamp(System.currentTimeMillis()));
-        addressRepo.save(address);
     }
 
     /**
@@ -109,27 +109,22 @@ public class CustomerService {
      * @param last_name   фамилия
      * @param middle_name отчество
      * @param sex         пол
-     * @return false если прошло проверку, иначе true
+     * @return true если прошло проверку
      **/
-    public boolean checkCustomerPersonalData(String first_name, String last_name, String middle_name, String sex,
-                                             Model model) {
+    public boolean checkCustomerPersonalData(String first_name, String last_name, String middle_name, String sex) {
         if (!first_name.isEmpty() && !StringHelper.isLetters(first_name)) {
-            model.addAttribute("message", "Введите корректное имя");
-            return true;
+            return false;
         }
         if (!last_name.isEmpty() && !StringHelper.isLetters(last_name)) {
-            model.addAttribute("message", "Введите корректную фамилию");
-            return true;
+            return false;
         }
         if (!middle_name.isEmpty() && !StringHelper.isLetters(middle_name)) {
-            model.addAttribute("message", "Введите корректное отчество");
-            return true;
+            return false;
         }
         if (!sex.equals("male") && !sex.equals("female")) {
-            model.addAttribute("message", "Введите корректный ♂SEX♂");
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -141,35 +136,29 @@ public class CustomerService {
      * @param street  улица
      * @param house   дом
      * @param flat    квартира
-     * @return false если прошло проверку, иначе true
+     * @return true если прошло проверку
      **/
     public boolean checkCustomerAddressData(String country, String region, String city, String street, String house,
-                                            String flat, Model model) {
+                                            String flat) {
         if (!country.isEmpty() && !StringHelper.isLetters(country)) {
-            model.addAttribute("message", "Введите корректную страну");
-            return true;
+            return false;
         }
         if (!region.isEmpty() && !StringHelper.isLetters(region)) {
-            model.addAttribute("message", "Введите корректный регион");
-            return true;
+            return false;
         }
         if (!city.isEmpty() && !StringHelper.isLettersNumbersAndHyphen(city)) {
-            model.addAttribute("message", "Введите корректный город");
-            return true;
+            return false;
         }
         if (!street.isEmpty() && !StringHelper.isLettersNumbersAndHyphen(street)) {
-            model.addAttribute("message", "Введите корректную улицу");
-            return true;
+            return false;
         }
         if (!house.isEmpty() && !StringHelper.isLettersNumbersAndSlash(house)) {
-            model.addAttribute("message", "Введите корректный дом");
-            return true;
+            return false;
         }
         if (!flat.isEmpty() && !StringHelper.isNumbers(flat)) {
-            model.addAttribute("message", "Введите корректную квартиру");
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
 }
