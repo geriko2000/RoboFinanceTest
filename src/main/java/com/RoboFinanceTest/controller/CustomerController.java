@@ -63,8 +63,8 @@ public class CustomerController {
             @RequestParam(required = false) String flat,
             Model model) {
 
-        if (customerService.checkCustomerPersonalData(first_name, last_name, middle_name, sex) ||
-                customerService.checkCustomerAddressData(country, region, city, street, house, flat)) {
+        if (customerService.checkCustomerPersonalData(first_name, last_name, middle_name, sex, model) ||
+                customerService.checkCustomerAddressData(country, region, city, street, house, flat, model)) {
             Customer customer = customerService.addCustomer(first_name, last_name, middle_name, sex,
                     customerService.addAddress(country, region, city, street, house, flat));
             model.addAttribute("message", "Пользователь " + customer.getFirst_name() + " " + customer.getLast_name() +
@@ -114,7 +114,7 @@ public class CustomerController {
                                        @RequestParam(required = false) String flat,
                                        Model model) {
 
-        if (customerService.checkCustomerAddressData(country, region, city, street, house, flat)) {
+        if (customerService.checkCustomerAddressData(country, region, city, street, house, flat, model)) {
             try {
                 long customerId = Long.parseLong(id);
                 if (customerRepo.findById(customerId) == null) {
